@@ -2,8 +2,10 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 
-
 # Create your models here.
+from martor.models import MartorField
+
+
 class Links(models.Model):
     class Meta:
         verbose_name = _('Link')
@@ -91,6 +93,24 @@ class Services(models.Model):
         to=Links,
         blank=True,
         verbose_name=_('Links')
+    )
+
+
+class ServiceAboutPreset(models.Model):
+    class Meta:
+        verbose_name = 'Preset'
+        verbose_name_plural = 'Preset\'s'
+
+    def __str__(self):
+        return self.name
+
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_("Name")
+    )
+    preset = MartorField(
+        max_length=50000,
+        verbose_name=_("Preset")
     )
 
 
