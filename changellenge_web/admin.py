@@ -1,12 +1,17 @@
 from django.contrib import admin
+from martor.widgets import AdminMartorWidget
+
 from .models import Services, ServicesRelation
-from django.utils.translation import gettext_lazy as _
+from django.db import models
 
 
 # Register your models here.
 
 @admin.register(Services)
 class ServicesAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.TextField: {'widget': AdminMartorWidget},
+    }
     list_display = ('name', 'status', 'date_created', 'date_release', 'stars', 'parents_count', 'children_count')
     list_display_links = ('name',)
     list_filter = ('status',)
