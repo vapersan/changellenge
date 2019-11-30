@@ -1,6 +1,9 @@
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.contrib.auth.forms import AuthenticationForm
 from changellenge_web import models
 from . import forms
 import pandas
@@ -64,3 +67,20 @@ def liven_test(request):
     return HttpResponse(
         f'<form><textarea name="test"></textarea><button>Kek</button></form><br><pre>{str(df.sort_values("diff").head(10))}</pre>'
     )
+
+
+def index(request):
+    if request.user.is_authenticated:
+        return redirect(reverse('services'))
+    form = AuthenticationForm()
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            login(request=request, user=form.get_user())
+            return redirect(reverse('services'))
+    return render(request, 'changellenge/reg.html', {'form': form})
+
+
+@login_required(login_url='')
+def services(request):
+    return render(request, 'changellenge/index.html')

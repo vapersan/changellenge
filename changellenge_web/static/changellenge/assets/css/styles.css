@@ -1,0 +1,133 @@
+html {
+}
+
+.logo {
+  font-family: Montserrat, sans-serif;
+  text-align: center;
+  font-weight: bold;
+}
+
+.hr-cst {
+  margin: 5px 0px;
+}
+
+.name {
+  text-align: center;
+  margin-bottom: 15px;
+  margin-top: -19px;
+}
+
+.hsm {
+  margin-bottom: -4px;
+}
+
+.decryption {
+  font-family: Montserrat, sans-serif;
+  color: rgb(0,123,141);
+}
+
+.nav-logo {
+  background-size: cover;
+  width: 50px;
+}
+
+.st-link {
+  color: rgb(0,123,141) !important;
+}
+
+.nav-item a {
+  color: rgb(0,123,141) !important;
+}
+
+.st-link:hover {
+  color: black !important;
+}
+
+.hsm-nav {
+  text-align: left;
+  margin: 0;
+  font-size: 1.6em;
+  display: none;
+}
+
+@media (max-width: 767px) and (min-width: 356px) {
+  .hsm-nav {
+    display: initial;
+  }
+}
+
+@media (max-width: 440px) {
+  .d-flex.d-sm-inline-flex {
+    font-size: 12px;
+  }
+}
+
+.search-stl {
+  padding: 2px 12px;
+  width: auto;
+  height: auto;
+  margin-left: auto;
+  font-family: Montserrat, sans-serif;
+}
+
+@media (max-width: 991px) {
+  .search-stl {
+    margin-left: 0;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+}
+
+.ml-cst {
+  margin-left: 20px;
+}
+
+@media (max-width: 991px) {
+  .ml-cst {
+    margin-left: 0;
+  }
+}
+
+.radio-lab {
+  font-family: Montserrat, sans-serif;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+
+.heart {
+  background-size: cover;
+  width: 35px;
+  filter: grayscale(100%);
+}
+
+.dropdown-item:hover {
+  background-color: #007b8d !important;
+  color: white;
+}
+
+.drp-stl {
+  margin-left: 5px;
+}
+
+@media (max-width: 991px) {
+  .drp-stl {
+    text-align: center;
+    width: 100%;
+    margin-left: 0px;
+  }
+}
+
+.drp-itm {
+  width: 100%;
+  padding: 2px 12px;
+}
+
+.amsify-suggestags-list {
+  width: 40% !important;
+}
+
+.nav-link:hover {
+  color: rgb(23,162,184) !important;
+}
+
