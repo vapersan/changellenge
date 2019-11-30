@@ -9,6 +9,9 @@ class Links(models.Model):
         verbose_name = _('Link')
         verbose_name_plural = _('Links')
 
+    def __str__(self):
+        return self.name
+
     name = models.CharField(
         max_length=255,
         verbose_name=_('Name')
@@ -23,6 +26,9 @@ class Services(models.Model):
     class Meta:
         verbose_name = _('Service')
         verbose_name_plural = _('Services')
+
+    def __str__(self):
+        return self.name
 
     service_status = (
         ('IDE', _('Idea')),
@@ -70,6 +76,7 @@ class Services(models.Model):
 
     links = models.ManyToManyField(
         to=Links,
+        blank=True,
         verbose_name=_('Links')
     )
 
@@ -82,6 +89,9 @@ class ServicesRelation(models.Model):
     class Meta:
         verbose_name = _('Service relation')
         verbose_name_plural = _('Service relations')
+
+    def __str__(self):
+        return self.children.name
 
     children = models.OneToOneField(
         to=Services,
