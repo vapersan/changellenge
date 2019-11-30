@@ -8,7 +8,7 @@ from changellenge_web.models import Services, ServicesRelation
 class AddServiceForm(forms.ModelForm):
     class Meta:
         model = Services
-        fields = ('name', 'about', 'authors', 'status', 'date_release')
+        fields = ('name', 'about', 'authors', 'status')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

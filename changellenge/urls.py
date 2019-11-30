@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('martor/', include('martor.urls')),
     path('', include('changellenge_web.urls')),
+    path('api/', include('changellenge_web.urls_api')),
 ]

@@ -6,6 +6,14 @@ from django.db import models
 from martor.models import MartorField
 
 
+class Tag(models.Model):
+    class Meta:
+        verbose_name = _('Tag')
+        verbose_name_plural = _('Tag\'s')
+
+    name = models.CharField(max_length=16)
+
+
 class Links(models.Model):
     class Meta:
         verbose_name = _('Link')
@@ -77,22 +85,14 @@ class Services(models.Model):
         verbose_name=_('Date added')
     )
 
-    date_release = models.DateTimeField(
-        blank=True,
-        default=None,
-        null=True,
-        verbose_name=_('Date released')
-    )
-
     stars = models.PositiveIntegerField(
         default=0,
         verbose_name=_('Stars')
     )
 
-    links = models.ManyToManyField(
-        to=Links,
-        blank=True,
-        verbose_name=_('Links')
+    tags = models.ManyToManyField(
+        to=Tag,
+        verbose_name=_("Tag's")
     )
 
 
