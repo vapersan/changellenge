@@ -1,5 +1,11 @@
+from django.http import HttpResponse
 from django.shortcuts import render
+
+from changellenge_web import models
 from . import forms
+import pandas
+import numpy as np
+import re
 
 
 # Create your views here.
@@ -14,4 +20,47 @@ def add_service(request):
         request,
         'changellenge/add-service.html',
         context
+    )
+
+
+def fisher_wagner(seq1, seq2):
+    size_x = len(seq1) + 1
+    size_y = len(seq2) + 1
+    matrix = np.zeros((size_x, size_y))
+    for x in range(size_x):
+        matrix[x, 0] = x
+    for y in range(size_y):
+        matrix[0, y] = y
+
+    for x in range(1, size_x):
+        for y in range(1, size_y):
+            if seq1[x - 1] == seq2[y - 1]:
+                matrix[x, y] = min(
+                    matrix[x - 1, y] + 1,
+                    matrix[x - 1, y - 1],
+                    matrix[x, y - 1] + 1)
+            else:
+                matrix[x, y] = min(
+                    matrix[x - 1, y] + 1,  # удаление
+                    matrix[x - 1, y - 1] + 1,  # замена
+                    matrix[x, y - 1] + 1)  # вставка
+    return matrix[size_x - 1, size_y - 1]
+
+
+def fisher_wagner_lst(src, dst):
+    src = re.split(r'[ \t\n\r\v\f]', src)
+    dst = re.split(r'[ \t\n\r\v\f]', dst)
+    diff = 0
+    for d in dst:
+        for s in src:
+            diff += fisher_wagner(d, s)
+    return diff
+
+
+def liven_test(request):
+    df = pandas.DataFrame([
+        {'about': x.about, 'id': x.id, 'name': x.name} for x in models.Services.objects.all()])
+    df['diff'] = df.apply(lambda x: fisher_wagner_lst(x[0], request.GET.get('test', '')), axis=1)
+    return HttpResponse(
+        f'<form><textarea name="test"></textarea><button>Kek</button></form><br><pre>{str(df.sort_values("diff").head(10))}</pre>'
     )
