@@ -103,5 +103,6 @@ class ServicesRelation(models.Model):
     parents = models.ManyToManyField(
         to=Services,
         verbose_name=_('Parents'),
-        related_name='Parents'
+        related_name='Parents',
+        blank=True
     )
