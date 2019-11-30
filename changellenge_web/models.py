@@ -30,12 +30,25 @@ class Services(models.Model):
     def __str__(self):
         return self.name
 
+    def parents(self):
+        return ServicesRelation.objects.get_or_create(children=self)[0].parents
+
+    def children(self):
+        return ServicesRelation.objects.filter(parents=self)
+
+    def parents_count(self):
+        return self.parents().count()
+
+    def children_count(self):
+        return self.children().count()
+
     service_status = (
         ('IDE', _('Idea')),
         ('IDV', _('In dev')),
         ('DEB', _('Debug')),
         ('COO', _('Сooked')),
     )
+
     name = models.CharField(
         max_length=255,
         verbose_name=_('Name')
@@ -66,7 +79,7 @@ class Services(models.Model):
         blank=True,
         default=None,
         null=True,
-        verbose_name=_('Date added')
+        verbose_name=_('Date released')
     )
 
     stars = models.PositiveIntegerField(

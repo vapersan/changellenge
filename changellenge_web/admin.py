@@ -29,12 +29,3 @@ class ServicesAdmin(admin.ModelAdmin):
     filter_vertical = ('authors', 'links')
     list_filter = ('status',)
     search_fields = ('about', 'name')
-
-    def parents_count(self, obj):
-        return ServicesRelation.objects.get_or_create(children=obj)[0].parents.count()
-
-    def children_count(self, obj):
-        return ServicesRelation.objects.filter(parents=obj).count()
-
-    parents_count.__name__ = 'Parents count'
-    children_count.__name__ = 'Children\'s count'
