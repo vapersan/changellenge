@@ -32,20 +32,20 @@
 <script src="{% static 'changellenge/assets/bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'changellenge/assets/js/bs-init.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
-<script src="{% static 'changellenge/assets/js/index.js' %}"></script>
+{#<script src="{% static 'changellenge/assets/js/index.js' %}"></script>#}
 <script>
     $(document).ready(function () {
         $('input[name="sort"]').click(function () {
-            $('input[name="sort"]').each((k, v) => {
-                $(v).next().css('background-color', 'rgb(255,255,255)');
-                $(v).next().css('color', 'black');
-                $(v).parent().css('background-color', 'rgb(255,255,255)');
-            });
-            if ($(this).prop('checked') === true) {
+            if ($(this).next().css('background-color') == 'rgba(0, 0, 0, 0)') {
                 $(this).next().css('background-color', 'rgb(23,162,184)');
                 $(this).next().css('color', 'white');
                 $(this).parent().css('background-color', 'rgb(23,162,184)');
+            } else {
+                $(this).next().css('background-color', 'rgba(0, 0, 0, 0)');
+                $(this).next().css('color', 'black');
+                $(this).parent().css('background-color', 'rgba(0, 0, 0, 0)');
             }
+
         });
         $('.heart').click(function () {
             if ($(this).css('filter') === 'grayscale(1)') {

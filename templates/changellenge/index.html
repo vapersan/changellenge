@@ -13,9 +13,9 @@
                             <div class="form-check border rounded {% if forloop.counter0 != 0 %}
                             ml-cst
                             {% endif %}" style="padding: 0;">
-                                <input class="form-check-input" type="radio" id="{{ service_sate.0 }}" name="sort"
+                                <input class="form-check-input border rounded" type="checkbox" id="{{ service_sate.0 }}" name="sort"
                                        style="display: none;" value="{{ service_sate.0 }}">
-                                <label class="form-check-label radio-lab" @click="filterParam='{{ service_sate.0 }}'"
+                                <label class="form-check-label check-lab" @click="addFilter('{{ service_sate.0 }}')"
                                        for="{{ service_sate.0 }}">{{ service_sate.1 }}</label>
                             </div>
                         {% endfor %}
@@ -172,7 +172,7 @@
         let app = new Vue({
             el: "#app",
             data: {
-                filterParam: '',
+                filterParam: [],
                 services: [
                     {% autoescape off %}
                         {% for service in services %}
@@ -214,6 +214,18 @@
                         .get('{% url "api-get-services" %}')
                         .then(response => (this.services = response.data));
                 },
+                addFilter: function (name) {
+                    console.log(this.filterParam);
+                    console.log(name);
+                    if (this.filterParam.indexOf(name) >= 0 ) {
+                        let index = this.filterParam.indexOf(name);
+                        if (index >= 0) {
+                            this.filterParam.splice(index, 1);
+                        }
+                    } else {
+                        this.filterParam.push(name);
+                    }
+                },
                 search: function ({type, target}) {
                     this.filterParam = '';
 
@@ -229,9 +241,10 @@
             },
             computed: {
                 filtredServices() {
-                    if (this.filterParam === '')
+                    console.log(this.filterParam);
+                    if (this.filterParam.length === 0)
                         return this.services;
-                    return this.services.filter(data => data['status'] === this.filterParam);
+                    return this.services.filter(data => this.filterParam.indexOf(data['status']) >= 0);
                 }
             }
         });
