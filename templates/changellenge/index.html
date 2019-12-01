@@ -129,12 +129,6 @@
                 </div>
                 <div class="modal-body">
                     <form method="post" action="#">
-                        {% autoescape off %}
-                            {#                            {{ None|get_martor_css }}#}
-                        {% endautoescape %}
-                        {% autoescape off %}
-                            {#                            {{ None|get_martor_js }}#}
-                        {% endautoescape %}
                         <p>
                             Название:&nbsp;<input class="border rounded form-control" type="text" required=""
                                                   name="name">
@@ -167,7 +161,37 @@
         </div>
     </div>
 {% endblock %}
+{% block onready %}
+        $('input[name="authors"]').amsifySuggestags({
+            type: 'amsify',
+            {% autoescape off %}
+                suggestions: {{ users }},
+            {% endautoescape %}
+            whiteList: true
+        });
+        $('input[name="parents"]').amsifySuggestags({
+            type: 'amsify',
+            {% autoescape off %}
+                {% for service in services %}
+                    suggestions: {{ services_name }},
+                {% endfor %}
+            {% endautoescape %}
+            whiteList: true
+        });
+        $('input[name="tags"]').amsifySuggestags({
+            type: 'amsify',
+            {% autoescape off %}
+                {% for service in services %}
+                    suggestions: {{ tags }},
+                {% endfor %}
+            {% endautoescape %}
+            whiteList: true
+        });
+{% endblock %}
 {% block extra_js %}
+    {% autoescape off %}
+        {{ None|get_martor_js }}
+    {% endautoescape %}
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
@@ -216,8 +240,14 @@
                         .get('{% url "api-get-services" %}')
                         .then(response => (this.services = response.data));
                 },
-                search: function ({ type, target }) {
+                search: function ({type, target}) {
                     this.filterParam = '';
+
+                    $('input[name="sort"]').each((k, v) => {
+                        $(v).next().css('background-color', 'rgb(255,255,255)');
+                        $(v).next().css('color', 'black');
+                        $(v).parent().css('background-color', 'rgb(255,255,255)');
+                    });
                     axios
                         .get('{% url "api-get-services" %}' + `?q=${target.value}`)
                         .then(response => (this.services = response.data));
@@ -233,30 +263,10 @@
         });
     </script>
     <script>
-        $('input[name="authors"]').amsifySuggestags({
-            type: 'amsify',
-            {% autoescape off %}
-                suggestions: {{ users }},
-            {% endautoescape %}
-            whiteList: true
-        });
-        $('input[name="parents"]').amsifySuggestags({
-            type: 'amsify',
-            {% autoescape off %}
-                {% for service in services %}
-                    suggestions: {{ services_name }},
-                {% endfor %}
-            {% endautoescape %}
-            whiteList: true
-        });
-        $('input[name="tags"]').amsifySuggestags({
-            type: 'amsify',
-            {% autoescape off %}
-                {% for service in services %}
-                    suggestions: {{ tags }},
-                {% endfor %}
-            {% endautoescape %}
-            whiteList: true
-        });
     </script>
+{% endblock %}
+{% block extra_css %}
+    {% autoescape off %}
+        {{ None|get_martor_css }}
+    {% endautoescape %}
 {% endblock %}

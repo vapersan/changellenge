@@ -101,6 +101,12 @@ html {
   filter: grayscale(100%);
 }
 
+.heart-rev {
+  background-size: cover;
+  width: 35px;
+  filter: grayscale(0);
+}
+
 .dropdown-item:hover {
   background-color: #007b8d !important;
   color: white;
@@ -129,5 +135,105 @@ html {
 
 .nav-link:hover {
   color: rgb(23,162,184) !important;
+}
+
+.status {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 5px;
+  float: right;
+  content: 'на рассмотрении';
+}
+
+.edit-btn, .del-btn {
+  padding: 3px 12px;
+  font-size: 14px;
+  margin-left: 12px;
+}
+
+.modal-req {
+  display: inline-flex;
+  margin-bottom: 0;
+}
+
+.stat-stl {
+  font-weight: bold;
+  color: #0b8d00;
+  font-size: 14px;
+  display: none;
+}
+
+.heading {
+  font-size: 48px;
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 32px;
+  }
+}
+
+.serv-name {
+  font-weight: normal;
+}
+
+@media (max-width: 768px) {
+  .serv-name {
+    font-size: 18px;
+  }
+}
+
+.stat-cont:before {
+  content: "на рассмотрении";
+}
+
+.stat-cont1:before {
+  content: "готово";
+}
+
+.stat-cont2:before {
+  content: "в разработке";
+}
+
+.stat-cont3:before {
+  content: "предложено";
+}
+
+@media (max-width: 768px) {
+  .stat-cont:before, .stat-cont1:before, .stat-cont2:before, .stat-cont3:before {
+    content: "•";
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 345px) {
+  .edit-btn {
+    margin-left: 0;
+  }
+}
+
+.prof-info {
+  display: flex;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .prof-info {
+    display: inherit;
+  }
+}
+
+.mrg-input {
+  margin-left: 16px;
+}
+
+@media (max-width: 768px) {
+  .mrg-input {
+    margin-left: 0;
+  }
+}
+
+.mark-inf {
+  cursor: pointer;
 }
 

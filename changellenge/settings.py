@@ -118,3 +118,11 @@ STATIC_URL = '/static/'
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
+
+'MARTOR_ENABLE_CONFIGS', {
+    'imgur': 'false',  # to enable/disable imgur/custom uploader.
+    'mention': 'false',  # to enable/disable mention
+    'jquery': 'flase',  # to include/revoke jquery (require for admin default django)
+    'living': 'false',  # to enable/disable live updates in preview
+    'spellcheck': 'false',  # to enable/disable spellcheck in form textareas
+}

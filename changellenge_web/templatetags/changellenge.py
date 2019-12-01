@@ -7,9 +7,9 @@ register = template.Library()
 
 @register.filter
 def get_martor_css(dummy):
-    return ''.join([f'<link rel="stylesheet" href="{static(x)}">' for x in MartorWidget().Media.css['all']])
+    return '\n'.join([f'<link rel="stylesheet" href="{static(x)}">' for x in MartorWidget().Media.css['all']])
 
 
 @register.filter
 def get_martor_js(dummy):
-    return ''.join([f'<script src="{static(x)}"></script>' for x in MartorWidget().Media.js])
+    return '\n'.join([f'<script src="{static(x)}"></script>' for x in MartorWidget().Media.js])
