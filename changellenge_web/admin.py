@@ -1,7 +1,7 @@
 from django.contrib import admin
 from martor.widgets import AdminMartorWidget
 
-from .models import Services, ServicesRelation, Links, ServiceAboutPreset
+from .models import Services, ServicesRelation, Links, ServiceAboutPreset, Tag
 from django.db import models
 
 
@@ -28,4 +28,10 @@ class ServicesAdmin(admin.ModelAdmin):
 @admin.register(ServiceAboutPreset)
 class ServiceAboutPresetAdmin(admin.ModelAdmin):
     list_display = ('name', 'preset')
+    list_display_links = ('name',)
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name',)
     list_display_links = ('name',)
