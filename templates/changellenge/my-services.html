@@ -14,8 +14,8 @@
                         <button class="btn btn-info edit-btn" type="button" data-target="#edit" data-toggle="modal">
                             Редактировать
                         </button>
-                        <button class="btn btn-danger del-btn" type="button" data-target="#req" data-toggle="modal">
-                            Удалить
+                        <button class="btn btn-danger ml-3 del-btn" type="button" data-target="#req"
+                                data-toggle="modal">Удалить
                         </button>
                         <a
                                 class="status stat-cont" href="#"></a><br></h4>
@@ -24,8 +24,8 @@
                         <button class="btn btn-info edit-btn" type="button" data-target="#edit" data-toggle="modal">
                             Редактировать
                         </button>
-                        <button class="btn btn-danger del-btn" type="button" data-target="#req" data-toggle="modal">
-                            Удалить
+                        <button class="btn btn-danger ml-3 del-btn" type="button" data-target="#req"
+                                data-toggle="modal">Удалить
                         </button>
                         <a
                                 class="text-success status stat-cont1" href="#"></a><br></h4>
@@ -34,8 +34,8 @@
                         <button class="btn btn-info edit-btn" type="button" data-target="#edit" data-toggle="modal">
                             Редактировать
                         </button>
-                        <button class="btn btn-danger del-btn" type="button" data-target="#req" data-toggle="modal">
-                            Удалить
+                        <button class="btn btn-danger ml-3 del-btn" type="button" data-target="#req"
+                                data-toggle="modal">Удалить
                         </button>
                         <a
                                 class="text-warning status stat-cont2" href="#"></a><br></h4>
@@ -44,8 +44,8 @@
                         <button class="btn btn-info edit-btn" type="button" data-target="#edit" data-toggle="modal">
                             Редактировать
                         </button>
-                        <button class="btn btn-danger del-btn" type="button" data-target="#req" data-toggle="modal">
-                            Удалить
+                        <button class="btn btn-danger ml-3 del-btn" type="button" data-target="#req"
+                                data-toggle="modal">Удалить
                         </button>
                         <a
                                 class="text-muted status stat-cont3" href="#"></a><br></h4>
@@ -140,4 +140,27 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block onready %}
+    $('input[name="authors"]').amsifySuggestags({
+    type: 'amsify',
+    {% autoescape off %}
+        suggestions: {{ users }},
+    {% endautoescape %}
+    whiteList: true
+    });
+    $('input[name="parents"]').amsifySuggestags({
+    type: 'amsify',
+    {% autoescape off %}
+        suggestions: {{ services_name }},
+    {% endautoescape %}
+    whiteList: true
+    });
+    $('input[name="tags"]').amsifySuggestags({
+    type: 'amsify',
+    {% autoescape off %}
+        suggestions: {{ tags }},
+    {% endautoescape %}
+    whiteList: true
+    });
 {% endblock %}
