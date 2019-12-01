@@ -33,14 +33,16 @@
                 <div class="col justify-content-xl-start">
                     <form class="d-lg-flex d-xl-flex">
                         {% for service_sate in service_sates %}
-                            <div class="form-check border rounded" style="padding: 0;">
+                            <div class="form-check border rounded {% if forloop.counter0 != 0 %}
+                            ml-cst
+                            {% endif %}" style="padding: 0;">
                                 <input class="form-check-input" type="radio" id="{{ service_sate.0 }}" name="sort"
                                        style="display: none;" value="{{ service_sate.0 }}">
                                 <label class="form-check-label radio-lab" @click="filterParam='{{ service_sate.0 }}'"
                                        for="{{ service_sate.0 }}">{{ service_sate.1 }}</label>
                             </div>
                         {% endfor %}
-                        <input class="form-control search-stl"
+                        <input class="form-control search-stl" @input="search" @change="search"
                                type="search" placeholder="Поиск">
                         <div class="dropdown bg-info border rounded border-info drp-stl">
                             <button class="btn btn-info dropdown-toggle drp-itm" data-toggle="dropdown"
@@ -66,7 +68,7 @@
                                 {% templatetag openvariable %} service.name {% templatetag closevariable %}
                             </h4>
                             <h6 class="text-muted card-subtitle mb-2">SQL</h6>
-                            <p class="card-text" v-html="service.about">
+                            <p class="card-text" v-html="service.about_html">
                             </p>
                             <button class="btn btn-info" type="button" data-toggle="modal" data-target="#more"
                                     v-on:click="modalID=service.id, modalShow()">
@@ -92,15 +94,18 @@
                             aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <p>Статус:&nbsp;<em
-                            style="font-family: Montserrat, sans-serif;font-weight: bold;font-style: normal;opacity: 1;font-size: 14px;color: #0b8d00;">готовое<br></em>
+                    <p>Статус:&nbsp;
+                        <em style="font-family: Montserrat, sans-serif;font-weight: bold;font-style: normal;opacity: 1;font-size: 14px;color: #0b8d00;"
+                            v-html="modalData.status_name">
+                            готовое
+                            <br></em>
                     </p>
                     <hr>
                     <p>Теги:&nbsp;<a class="mr-1" href="#"
                                      style="color: #007b8d;font-weight: bold;font-family: Montserrat, sans-serif;font-style: normal;font-size: 14px;">SQL</a>
                     </p>
                     <hr>
-                    <span v-html="modalData.about_html"></span><br>
+                    <span v-html="modalData.about_html"></span>
                 </div>
                 <div class="modal-footer flex-row-reverse">
                     <span>Разработчики:&nbsp;
@@ -187,9 +192,16 @@
                 modalID: 1,
                 modalData: {
                     'about_html': '',
+                    'status_name': '',
                     'name': '',
                     'authors': [{'last_name': '', 'first_name': ''}],
-                }
+                },
+                query: ''
+            },
+            mounted() {
+                axios
+                    .get('{% url "api-get-services" %}')
+                    .then(response => (this.services = response.data));
             },
             methods: {
                 modalShow: function (event) {
@@ -198,6 +210,17 @@
                         .get('{% url "api-get-service" '0' %}'.replace('0', this.modalID))
                         .then(response => (this.modalData = response.data));
                     console.log(this.modalData);
+                },
+                getAllServices: function () {
+                    axios
+                        .get('{% url "api-get-services" %}')
+                        .then(response => (this.services = response.data));
+                },
+                search: function ({ type, target }) {
+                    this.filterParam = '';
+                    axios
+                        .get('{% url "api-get-services" %}' + `?q=${target.value}`)
+                        .then(response => (this.services = response.data));
                 }
             },
             computed: {
