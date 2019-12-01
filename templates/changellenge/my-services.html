@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>My Services</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="assets/css/amsify.suggestags.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-light navbar-expand-md navigation-clean-button bg-color border-bottom">
+            <div class="container"><img class="nav-logo" src="assets/img/logo.png">
+                <h2 class="display-1 text-info hsm-nav">Hydra Search Micro</h2><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse ml-3"
+                    id="navcol-1">
+                    <ul class="nav navbar-nav mr-auto">
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="index.html" style="font-family: Montserrat, sans-serif;">Каталог</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="my-services.html" style="font-family: Montserrat, sans-serif;">Мои сервисы</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="#add" style="font-family: Montserrat, sans-serif;" data-toggle="modal">Добавить сервис</a></li>
+                    </ul><a class="nav-link st-link" href="profile.html" style="font-family: Montserrat, sans-serif;">Личный кабинет</a></div>
+            </div>
+        </nav>
+    </header>
+    <div class="container mt-2" style="font-family: Montserrat, sans-serif;">
+        <h3 class="display-4 text-uppercase heading">Добавленные сервисы</h3>
+    </div>
+    <hr>
+    <div style="font-family: Montserrat, sans-serif;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 p-2">
+                    <h4 class="mb-0 serv-name">Amazon DynamoDB<button class="btn btn-info edit-btn" type="button" data-target="#edit" data-toggle="modal">Редактировать</button><button class="btn btn-danger ml-3 del-btn" type="button" data-target="#req" data-toggle="modal">Удалить</button>
+                        <a
+                            class="status stat-cont" href="#"></a><br></h4>
+                    <hr>
+                    <h4 class="mb-0 serv-name">Amazon DynamoDB<button class="btn btn-info edit-btn" type="button" data-target="#edit" data-toggle="modal">Редактировать</button><button class="btn btn-danger ml-3 del-btn" type="button" data-target="#req" data-toggle="modal">Удалить</button>
+                        <a
+                            class="text-success status stat-cont1" href="#"></a><br></h4>
+                    <hr>
+                    <h4 class="mb-0 serv-name">Amazon DynamoDB<button class="btn btn-info edit-btn" type="button" data-target="#edit" data-toggle="modal">Редактировать</button><button class="btn btn-danger ml-3 del-btn" type="button" data-target="#req" data-toggle="modal">Удалить</button>
+                        <a
+                            class="text-warning status stat-cont2" href="#"></a><br></h4>
+                    <hr>
+                    <h4 class="mb-0 serv-name">Amazon DynamoDB<button class="btn btn-info edit-btn" type="button" data-target="#edit" data-toggle="modal">Редактировать</button><button class="btn btn-danger ml-3 del-btn" type="button" data-target="#req" data-toggle="modal">Удалить</button>
+                        <a
+                            class="text-muted status stat-cont3" href="#"></a><br></h4>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="edit" style="font-family: Montserrat, sans-serif;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="font-family: Montserrat, sans-serif;font-weight: 500;font-style: normal;">Редактирование</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <form method="post" action="#">
+                        <p>Название:&nbsp;<input class="border rounded form-control" type="text" required="" value="Amazon DynamoDB"></p>
+                        <p>Описание:&nbsp;<textarea class="form-control" cols="5" rows="5">Amazon DynamoDB – это база данных пар «ключ‑значение» и документов, которая обеспечивает задержку менее 10&amp;nbsp;миллисекунд при работе в любом масштабе.</textarea></p>
+                        <p
+                            class="mb-0">Авторы:&nbsp;</p>
+                            <div class="form-group"><input class="form-control form-control mb-1" type="text" name="planets" value="Earth,Mars" placeholder=" "></div>
+                            <p class="mb-0">&nbsp;Связанные сервисы:</p>
+                            <div class="form-group"><input class="form-control form-control mb-1" type="text" name="planets" value="Earth,Mars" placeholder=" "></div>
+                            <p class="mb-0">Тег:</p>
+                            <div class="form-group"><input class="form-control form-control mb-1" type="text" name="planets" value="Earth,Mars" placeholder=" "></div><button class="btn btn-info" id="save-btn" type="button">Сохранить</button><button class="btn btn-light ml-3"
+                                type="button" data-dismiss="modal">Закрыть</button><span class="text-uppercase float-right mt-2 stat-stl">Сохранено</span></form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="add" style="font-family: Montserrat, sans-serif;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="font-family: Montserrat, sans-serif;font-weight: 500;font-style: normal;">Добавление сервиса</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <form method="post" action="#">
+                        <p>Название:&nbsp;<input class="border rounded form-control" type="text" required=""></p>
+                        <p>Описание:&nbsp;<textarea class="form-control" cols="5" rows="5"></textarea></p>
+                        <p class="mb-0">Авторы:&nbsp;</p>
+                        <div class="form-group"><input class="form-control form-control mb-1" type="text" name="planets" value="Earth,Mars" placeholder=" "></div>
+                        <p class="mb-0">&nbsp;Связанные сервисы:</p>
+                        <div class="form-group"><input class="form-control form-control mb-1" type="text" name="planets" value="Earth,Mars" placeholder=" "></div>
+                        <p class="mb-0">Тег:</p>
+                        <div class="form-group"><input class="form-control form-control mb-1" type="text" name="planets" value="Earth,Mars" placeholder=" "></div><button class="btn btn-info" type="button">Добавить</button><button class="btn btn-light ml-3" type="button" data-dismiss="modal">Закрыть</button>
+                        <span
+                            class="text-uppercase float-right mt-2" style="font-weight: bold;color: #0b8d00;font-size: 14px;">добавлено</span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="req" style="font-family: Montserrat, sans-serif;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Вы уверены?</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <p class="modal-req">Удалить сервис&nbsp;<br><strong>Amazon DynamoDB?<br></strong></p>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Отмена</button><button class="btn btn-danger" type="button" data-dismiss="modal">Удалить</button></div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/jquery.amsify.suggestags.js"></script>
+</body>
+
+</html>
