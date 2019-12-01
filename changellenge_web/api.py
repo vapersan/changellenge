@@ -1,4 +1,5 @@
 from django.http import JsonResponse, Http404, HttpResponse
+from martor.templatetags.martortags import safe_markdown
 
 from . import models
 
@@ -28,6 +29,7 @@ def get_service(request, id_):
         'id': x.id,
         'name': x.name,
         'about': x.about,
+        'about_html': safe_markdown(x.about),
         'authors': [{'first_name': y.first_name, 'last_name': y.last_name} for y in x.authors.all()],
         'status': x.status,
         'date_created': x.date_created,

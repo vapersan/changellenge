@@ -68,7 +68,8 @@
                             <h6 class="text-muted card-subtitle mb-2">SQL</h6>
                             <p class="card-text" v-html="service.about">
                             </p>
-                            <button class="btn btn-info" type="button" data-toggle="modal" data-target="#more">
+                            <button class="btn btn-info" type="button" data-toggle="modal" data-target="#more"
+                                    v-on:click="modalID=service.id, modalShow()">
                                 Подробнее
                             </button>
                             <a class="card-link text-dark" href="javascript:void(0);">
@@ -86,7 +87,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Amazon DynamoDB<br></h4>
+                    <h4 class="modal-title" v-html="modalData.name"><br></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">×</span></button>
                 </div>
@@ -99,11 +100,14 @@
                                      style="color: #007b8d;font-weight: bold;font-family: Montserrat, sans-serif;font-style: normal;font-size: 14px;">SQL</a>
                     </p>
                     <hr>
-                    <span>Amazon DynamoDB&nbsp;– это база данных пар «ключ‑значение» и документов, которая обеспечивает задержку менее 10&nbsp;миллисекунд при работе в любом масштабе.<br></span>
+                    <span v-html="modalData.about_html"></span><br>
                 </div>
-                <div class="modal-footer flex-row-reverse"><span>Разработчики:&nbsp;<a class="text-black-50 mr-1"
-                                                                                       href="#">Лейкин Гриша,</a><a
-                        class="text-black-50 mr-1" href="#">Лейкин Гриша,</a><a class="text-black-50 mr-1" href="#">Лейкин Гриша</a></span>
+                <div class="modal-footer flex-row-reverse">
+                    <span>Разработчики:&nbsp;
+                        <a v-for="autor in modalData.authors" class="text-black-50 mr-1" href="#">
+                            {% templatetag openvariable %} autor.first_name {% templatetag closevariable %}
+                            {% templatetag openvariable %} autor.last_name {% templatetag closevariable %} ,</a>
+                    </span>
                 </div>
             </div>
         </div>
@@ -121,10 +125,10 @@
                 <div class="modal-body">
                     <form method="post" action="#">
                         {% autoescape off %}
-{#                            {{ None|get_martor_css }}#}
+                            {#                            {{ None|get_martor_css }}#}
                         {% endautoescape %}
                         {% autoescape off %}
-{#                            {{ None|get_martor_js }}#}
+                            {#                            {{ None|get_martor_js }}#}
                         {% endautoescape %}
                         <p>
                             Название:&nbsp;<input class="border rounded form-control" type="text" required=""
@@ -160,6 +164,7 @@
 {% endblock %}
 {% block extra_js %}
     <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         let app = new Vue({
             el: "#app",
@@ -172,13 +177,28 @@
                                 'id': {{ service.id }},
                                 'name': `{{ service.name }}`,
                                 {% autoescape off %}
-                                'about': `{{ service.about|safe_markdown|truncatechars_html:100 }}`,
+                                    'about': `{{ service.about|safe_markdown|truncatechars_html:100 }}`,
                                 {% endautoescape %}
                                 'status': `{{ service.status }}`
                             },
                         {% endfor %}
                     {% endautoescape %}
-                ]
+                ],
+                modalID: 1,
+                modalData: {
+                    'about_html': '',
+                    'name': '',
+                    'authors': [{'last_name': '', 'first_name': ''}],
+                }
+            },
+            methods: {
+                modalShow: function (event) {
+                    console.log(this.modalID);
+                    axios
+                        .get('{% url "api-get-service" '0' %}'.replace('0', this.modalID))
+                        .then(response => (this.modalData = response.data));
+                    console.log(this.modalData);
+                }
             },
             computed: {
                 filtredServices() {
