@@ -19,9 +19,4 @@ $(document).ready(function(){
             $(this).css('filter', 'grayscale(1)');
         }
     });
-    $('input[name="planets"]').amsifySuggestags({
-        type : 'amsify',
-        suggestions: ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupitor', 'Uranus', 'Neptune', 'Pluto'],
-        whiteList: true
-    });
 });

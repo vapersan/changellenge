@@ -83,4 +83,11 @@ def index(request):
 
 @login_required(login_url='')
 def services(request):
-    return render(request, 'changellenge/index.html')
+    return render(request, 'changellenge/index.html', {
+        'services': models.Services.objects.all(),
+        'service_sates': models.Services.service_status,
+        'users': [x.first_name + ' ' + x.last_name for x in models.get_user_model().objects.all()],
+        'services_name': [x.name for x in models.Services.objects.all()],
+        'tags': [x.name for x in models.Tag.objects.all()],
+        'form': forms.AddServiceForm()
+    })
