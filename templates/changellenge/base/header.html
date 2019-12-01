@@ -1,0 +1,26 @@
+{% load static %}
+<header>
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button bg-color border-bottom">
+        <div class="container">
+            <img class="nav-logo" src="{% static 'changellenge/assets/img/logo.png' %}">
+            <h2 class="display-1 text-info hsm-nav">Hydra Search Micro</h2>
+            <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+                    class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse ml-3"
+                 id="navcol-1">
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="{% url 'index' %}" style="font-family: Montserrat, sans-serif;">Каталог</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="{% url 'my-services' %}" style="font-family: Montserrat, sans-serif;">Мои сервисы</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="#add" style="font-family: Montserrat, sans-serif;" data-toggle="modal">Добавить сервис</a>
+                    </li>
+                </ul>
+                <a class="nav-link st-link" href="{% url 'profile' %}" style="font-family: Montserrat, sans-serif;">Личный кабинет</a>
+            </div>
+        </div>
+    </nav>
+</header>

@@ -19,6 +19,8 @@ def add_service(request):
     }
     if request.method == 'POST':
         context['form'] = forms.AddServiceForm(request.POST)
+        if context['form'].is_valid():
+            return HttpResponse('OK')
     return render(
         request,
         'changellenge/add-service.html',
@@ -43,8 +45,27 @@ def services(request):
     return render(request, 'changellenge/index.html', {
         'services': models.Services.objects.all(),
         'service_sates': models.Services.service_status,
-        'users': [x.first_name + ' ' + x.last_name for x in models.get_user_model().objects.all()],
-        'services_name': [x.name for x in models.Services.objects.all()],
-        'tags': [x.name for x in models.Tag.objects.all()],
+        'users': [{'tag': ' '.join([x.first_name, x.last_name]), 'value': x.id} for x in
+                  models.get_user_model().objects.all()],
+        'services_name': [{'tag': x.name, 'value': x.id} for x in models.Services.objects.all()],
+        'tags': [{'tag': x.name, 'value': x.id} for x in models.Tag.objects.all()],
         'form': forms.AddServiceForm()
     })
+
+
+@login_required(login_url='')
+def my_services(request):
+    return render(request, 'changellenge/my-services.html', {
+        'services': models.Services.objects.all(),
+        'service_sates': models.Services.service_status,
+        'users': [{'tag': ' '.join([x.first_name, x.last_name]), 'value': x.id} for x in
+                  models.get_user_model().objects.all()],
+        'services_name': [{'tag': x.name, 'value': x.id} for x in models.Services.objects.all()],
+        'tags': [{'tag': x.name, 'value': x.id} for x in models.Tag.objects.all()],
+        'form': forms.AddServiceForm()
+    })
+
+
+@login_required(login_url='')
+def profile(request):
+    return render(request, 'changellenge/profile.html')

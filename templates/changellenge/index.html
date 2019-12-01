@@ -3,30 +3,7 @@
 {% load martortags %}
 {% load changellenge %}
 {% block content %}
-    <header>
-        <nav class="navbar navbar-light navbar-expand-md navigation-clean-button bg-color border-bottom">
-            <div class="container"><img class="nav-logo" src="{% static 'changellenge/assets/img/logo.png' %}">
-                <h2 class="display-1 text-info hsm-nav">Hydra Search Micro</h2>
-                <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-                        class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse ml-3"
-                     id="navcol-1">
-                    <ul class="nav navbar-nav mr-auto">
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="#"
-                                                                    style="font-family: Montserrat, sans-serif;">Каталог</a>
-                        </li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="#add"
-                                                                    style="font-family: Montserrat, sans-serif;"
-                                                                    data-toggle="modal">Добавить</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="#"
-                                                                    style="font-family: Montserrat, sans-serif;">Мои
-                            сервисы</a></li>
-                    </ul>
-                    <a class="nav-link st-link" href="#" style="font-family: Montserrat, sans-serif;">Личный кабинет</a>
-                </div>
-            </div>
-        </nav>
-    </header>
+    {% include 'changellenge/base/header.html' %}
     <div class="mt-1" id="app">
         <div class="container">
             <div class="row mb-3 mt-3">
@@ -128,7 +105,8 @@
                             aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="#">
+                    <form method="post" action="{% url 'add-service' %}">
+                        {% csrf_token %}
                         <p>
                             Название:&nbsp;<input class="border rounded form-control" type="text" required=""
                                                   name="name">
@@ -150,7 +128,7 @@
                         <p class="mb-0">Тег:</p>
                         <div class="form-group"><input class="form-control form-control mb-1" type="text" name="tags"
                                                        value="" placeholder=" "></div>
-                        <button class="btn btn-info" type="button">Добавить</button>
+                        <button class="btn btn-info" type="submit">Добавить</button>
                         <button class="btn btn-light ml-3" type="button" data-dismiss="modal">Закрыть</button>
                         <span
                                 class="text-uppercase float-right mt-2"
@@ -162,31 +140,27 @@
     </div>
 {% endblock %}
 {% block onready %}
-        $('input[name="authors"]').amsifySuggestags({
-            type: 'amsify',
-            {% autoescape off %}
-                suggestions: {{ users }},
-            {% endautoescape %}
-            whiteList: true
-        });
-        $('input[name="parents"]').amsifySuggestags({
-            type: 'amsify',
-            {% autoescape off %}
-                {% for service in services %}
-                    suggestions: {{ services_name }},
-                {% endfor %}
-            {% endautoescape %}
-            whiteList: true
-        });
-        $('input[name="tags"]').amsifySuggestags({
-            type: 'amsify',
-            {% autoescape off %}
-                {% for service in services %}
-                    suggestions: {{ tags }},
-                {% endfor %}
-            {% endautoescape %}
-            whiteList: true
-        });
+    $('input[name="authors"]').amsifySuggestags({
+    type: 'amsify',
+    {% autoescape off %}
+        suggestions: {{ users }},
+    {% endautoescape %}
+    whiteList: true
+    });
+    $('input[name="parents"]').amsifySuggestags({
+    type: 'amsify',
+    {% autoescape off %}
+        suggestions: {{ services_name }},
+    {% endautoescape %}
+    whiteList: true
+    });
+    $('input[name="tags"]').amsifySuggestags({
+    type: 'amsify',
+    {% autoescape off %}
+        suggestions: {{ tags }},
+    {% endautoescape %}
+    whiteList: true
+    });
 {% endblock %}
 {% block extra_js %}
     {% autoescape off %}

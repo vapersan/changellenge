@@ -10,7 +10,10 @@
     {% endautoescape %}
 </head>
 <body>
-{{ form }}
+<form action="{% url 'add-service' %}" method="post">
+    {{ form }}
+    <button type="submit"></button>
+</form>
 {% autoescape off %}
     {{ None|get_martor_js }}
 {% endautoescape %}
